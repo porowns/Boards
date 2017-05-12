@@ -6,5 +6,24 @@ def index(request):
         request,
         'index.html',
         context={
+
+        }
+    )
+
+def boards(request):
+    return render(
+        request,
+        'boards.html',
+        context={
+
+        }
+    )
+
+def profile(request):
+    return render(
+        request,
+        'profile.html',
+        context={
+        
         }
     )

@@ -32,3 +32,11 @@ p {
 .tablehead {
   width: 33%;
 }
+
+.button-wrapper {
+  text-align: center;
+}
+
+.profile-button {
+  width: 250px;
+}

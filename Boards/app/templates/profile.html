@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="greeting">
+  <h1>Profile</h1>
+  <h3>Shhh... This is your secret area.</h3>
+  <hr>
+</div>
+
+<div class="button-wrapper">
+  <button onclick="location.href ='#" type="button" class="profile-button btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i>Change Password</button>
+  <button onclick="location.href ='#';"type="button" class="profile-button btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i>Change Username</button>
+  <button onclick="location.href ='#';" type="button" class="profile-button btn btn-danger view-button"><i class="fa fa-fw fa-times"></i>Delete Account</button>
+  <hr>
+  <div class="enemies panel panel-danger">
+     <div class="panel-heading">Enemies</div>
+     <div class="panel-body">
+       <table class="table"style="width:100%">
+        <tr>
+          <th class="tablehead">Post Title</th>
+          <th class="tablehead">Last Post</th>
+          <th class="tablehead">Actions</th>
+        </tr>
+        <tr>
+          <td>
+            Joe Billy
+          </td>
+          <td>
+            Calculus ##
+          </td>
+          <td>
+            <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
+            <button onclick="location.href ='#';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
+          </td>
+        </tr>
+      </table>
+     </div>
+  </div>
+</div>
+{% endblock %}
