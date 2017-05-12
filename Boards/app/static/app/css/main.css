@@ -12,3 +12,23 @@ p {
   background-color: red;
   height: 100%;
 }
+
+.greeting {
+  text-align: center;
+}
+
+.panel-heading {
+  text-align: center;
+}
+
+.table {
+  text-align: center;
+}
+
+.table th {
+  text-align: center;
+}
+
+.tablehead {
+  width: 33%;
+}

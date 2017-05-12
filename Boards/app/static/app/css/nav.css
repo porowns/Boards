@@ -22,7 +22,7 @@ body {
 .profile-userpic img {
   float: none;
   margin: 0 auto;
-  width: 75%;
+  width: 50%;
   height: 25%;
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;

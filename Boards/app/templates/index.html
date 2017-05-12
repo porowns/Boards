@@ -1,1 +1,71 @@
 {% extends "base.html" %}
+{% block content %}
+
+
+<div class="greeting">
+  <h1>Welcome back, User.</h1>
+  <h3>You're looking mighty dapper today.</h3>
+  <hr>
+</div>
+
+<div class="boards panel panel-primary">
+   <div class="panel-heading">Boards</div>
+   <div class="panel-body">
+     <table class="table"style="width:100%">
+      <tr>
+        <th class="tablehead">Board Name</th>
+        <th class="tablehead">Last post</th>
+        <th class="tablehead">Actions</th>
+      </tr>
+      <tr>
+        <td>
+          Math Help
+        </td>
+        <td>
+          Joe Smith
+        </td>
+        <td>
+          <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
+          <button onclick="location.href ='#';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
+          <button onclick="location.href ='#';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
+        </td>
+      </tr>
+    </table>
+   </div>
+</div>
+
+<div class="boards panel panel-default">
+   <div class="panel-heading">Posts</div>
+   <div class="panel-body">
+     <table class="table"style="width:100%">
+      <tr>
+        <th class="tablehead">Post Title</th>
+        <th class="tablehead">Likes</th>
+        <th class="tablehead">Actions</th>
+      </tr>
+      <tr>
+        <td>
+          Calculus #12
+        </td>
+        <td>
+          15
+        </td>
+        <td>
+          <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
+          <button onclick="location.href ='#';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
+          <button onclick="location.href ='#';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
+        </td>
+      </tr>
+    </table>
+   </div>
+</div>
+
+<hr>
+<div class="friends panel panel-success">
+   <div class="panel-heading">Friends</div>
+   <div class="panel-body">
+     Panel Content
+   </div>
+</div>
+
+{% endblock %}
