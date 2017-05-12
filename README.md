@@ -1,5 +1,5 @@
 # Boards
-Forum-like board software written in Django.
+Forum-like board software written in Django. Written in order to practice building Django web applications.
 
 # Installation
 
