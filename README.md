@@ -38,3 +38,47 @@ Forum-like board software written in Django.
 - Moderator can edit a post on their board
 
 - Moderator can block users, which will block them from their board
+
+# Routes
+
+### Dashboard
+
+- /dashboard
+
+- /profile
+
+- /settings
+
+- /change-username
+
+- /change-password
+
+### Boards
+
+- /boards
+
+- /create-board
+
+- /modify-board
+
+- /delete-board
+
+### Posts
+
+- /posts
+
+- /create-post
+
+- /modify-post
+
+- /delete-post
+
+### User
+
+- /register
+
+- /login
+
+- /logout
+
+
