@@ -1,0 +1,14 @@
+body {
+  /*background-image:url('../images/blurred.jpg'});*/
+  background-color:red;
+  height:100%;
+}
+
+p {
+  color: red;
+}
+
+.fill {
+  background-color: red;
+  height: 100%;
+}
