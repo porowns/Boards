@@ -96,3 +96,67 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('/login')
+
+def viewBoard(request, pk):
+    user = request.user
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        return render(
+            request,
+            'view_board.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+            }
+        )
+    else:
+        return redirect('login')
+
+def createBoard(request):
+    user = request.user
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        return render(
+            request,
+            'create_board.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+            }
+        )
+    else:
+        return redirect('login')
+
+def modifyBoard(request, pk):
+    user = request.user
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        return render(
+            request,
+            'modify_board.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+            }
+        )
+    else:
+        return redirect('login')
+
+def removeBoard(request, pk):
+    user = request.user
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        return render(
+            request,
+            'remove_board.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+            }
+        )
+    else:
+        return redirect('login')
