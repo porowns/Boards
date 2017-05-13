@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .utils import getGroup
-from .models import Board, Post
+from .models import Board, Post, Category
 # Create your views here.
 def index(request):
     user = request.user
@@ -23,6 +23,7 @@ def index(request):
 def boards(request):
     user = request.user
     boards = Board.objects.all()
+    categories = Category.objects.all()
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
@@ -32,6 +33,7 @@ def boards(request):
             context={
                 'user': user,
                 'boards': boards,
+                'categories': categories,
                 'usergroup': usergroup,
             }
         )

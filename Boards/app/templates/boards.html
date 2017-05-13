@@ -8,8 +8,9 @@
   <hr>
 </div>
 
+{% for cat in categories %}
 <div class="boards panel panel-primary">
-   <div class="panel-heading">Boards</div>
+   <div class="panel-heading">{{cat.name}}</div>
    <div class="panel-body">
      <table class="table"style="width:100%">
       <tr>
@@ -17,21 +18,24 @@
         <th class="tablehead">Moderator</th>
         <th class="tablehead">Actions</th>
       </tr>
-      <tr>
-        <td>
-          Math Help
-        </td>
-        <td>
-          Joe Smith
-        </td>
-        <td>
-          <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
-          <button onclick="location.href ='#';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
-          <button onclick="location.href ='#';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
-        </td>
-      </tr>
+      {% for board in boards %}
+        <tr>
+          <td>
+            {{ board.title }}
+          </td>
+          <td>
+            {{ board.moderator.username }}
+          </td>
+          <td>
+            <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
+            <button onclick="location.href ='#';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
+            <button onclick="location.href ='#';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
+          </td>
+        </tr>
+      {% endfor %}
     </table>
    </div>
+   <hr>
 </div>
-
+{% endfor %}
 {% endblock %}
