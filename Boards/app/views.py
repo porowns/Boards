@@ -1,30 +1,39 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
-
+from .utils import getGroup
 # Create your views here.
 def index(request):
     user = request.user
     if user.is_authenticated():
         user = request.user
+        usergroup = getGroup(user)
         return render(
             request,
             'index.html',
             context={
-                'user': user
+                'user': user,
+                'usergroup': usergroup,
             }
         )
     else:
         return redirect('login')
 def boards(request):
-    return render(
-        request,
-        'boards.html',
-        context={
-
-        }
-    )
+    user = request.user
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        return render(
+            request,
+            'boards.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+            }
+        )
+    else:
+        return redirect('login')
 
 def profile(request):
     return render(
@@ -54,6 +63,8 @@ def register(request):
         user.set_password(password)
         user.save()
         user = authenticate(username = username, password=password)
+        user_group = Group.objects.get(name="User")
+        user_group.user_set.add(user)
         login(request, user)
         return redirect('/')
 
