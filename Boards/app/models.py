@@ -10,7 +10,7 @@ class Board(models.Model):
     """
 
     CATEGORY_CHOICES = (
-        ('MATH', 'Math'),
+        ('MATH', 'MATH'),
         ('SCIENCE', 'SCIENCE'),
         ('HISTORY', 'HISTORY'),
         ('GENERAL', 'GENERAL'),
@@ -19,6 +19,11 @@ class Board(models.Model):
     title = models.CharField(max_length=20)
     category = models.CharField(max_length=20,choices=CATEGORY_CHOICES,default='GENERAL')
     moderator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.title
+    def get_absolute_url(self):
+        return reverse('view-board', args=[str(self.id)])
 
 class Post(models.Model):
     """
@@ -29,3 +34,8 @@ class Post(models.Model):
     likes = models.IntegerField
     board = models.ForeignKey('Board', on_delete=models.SET_NULL, null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.title
+    def get_absolute_url(self):
+        return reverse('view-post', args=[str(self.id)])
