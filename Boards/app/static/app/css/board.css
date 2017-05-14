@@ -1,0 +1,29 @@
+.container {
+    padding: 5% 5% 5% 5%;
+}
+.boardbox {
+  background-color: #C0C0C0;
+    box-shadow: 10px 10px 5px #E8E8E8;
+}
+
+.panel-heading {
+  text-align: center;
+}
+
+#submit {
+  margin: auto;
+  text-align: center;
+}
+
+.panel-group {
+  padding: 10% 10% 10% 10%;
+}
+
+.panel {
+  padding: 5% 5% 5% 5%;
+}
+
+#submit {
+  width: 100%;
+  text-align: center;
+}

@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .utils import getGroup
 from .models import Board, Post, Category
+
 # Create your views here.
 def index(request):
     user = request.user
@@ -115,15 +116,29 @@ def viewBoard(request, pk):
 
 def createBoard(request):
     user = request.user
+    categories = Category.objects.all()
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            category = Category.objects.get(name =request.POST.get('category'))
+            moderator = request.user
+
+            new_board = Board(title = title, category = category, moderator = moderator)
+            new_board.save()
+            return redirect('/boards')
+
+        else:
+            pass
+            #form = newBoardForm()
         return render(
             request,
             'create_board.html',
             context={
                 'user': user,
                 'usergroup': usergroup,
+                'categories': categories,
             }
         )
     else:
