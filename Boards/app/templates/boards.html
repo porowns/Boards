@@ -30,9 +30,9 @@
             {{ board.moderator.username }}
           </td>
           <td>
-            <button onclick="location.href ='/view-post/{{ board.id}}';" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
-            <button onclick="location.href ='/modify-post/{{ board.id }}';" type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
-            <button onclick="location.href ='/remove-post/{{ board.id }}';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
+            <button onclick="location.href ='/view-board/{{ board.id}}';" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
+            <button onclick="location.href ='/modify-board/{{ board.id }}';" type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
+            <button onclick="location.href ='/remove-board/{{ board.id }}';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
           </td>
         </tr>
         {% else %}

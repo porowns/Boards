@@ -18,3 +18,10 @@ urlpatterns += {
     url(r'^modify-board/(?P<pk>\d+)/$', views.modifyBoard, name='modify-board'),
     url(r'^remove-board/(?P<pk>\d+)/$', views.removeBoard, name='remove-board'),
 }
+
+# Posts
+urlpatterns += {
+    url(r'^create-post', views.createPost, name='create-post'),
+    url(r'^modify-post/(?P<pk>\d+)/$', views.modifyPost, name='modify-post'),
+    url(r'^remove-post/(?P<pk>\d+)/$', views.removePost, name='remove-post'),
+}

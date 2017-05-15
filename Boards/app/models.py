@@ -50,8 +50,8 @@ class Post(models.Model):
     title = models.CharField(max_length=20)
     body = models.CharField(max_length=2000)
     likes = models.IntegerField
-    board = models.ForeignKey('Board', on_delete=models.SET_NULL, null=True)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    board = models.ForeignKey('Board', on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title

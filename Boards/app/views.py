@@ -199,3 +199,71 @@ def removeBoard(request, pk):
         return redirect('boards')
     else:
         return redirect('login')
+
+def createPost(request):
+    user = request.user
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            category = Category.objects.get(name =request.POST.get('category'))
+            moderator = request.user
+
+            new_board = Board(title = title, category = category, moderator = moderator)
+            new_board.save()
+            return redirect('/boards')
+
+        else:
+            pass
+            #form = newBoardForm()
+        return render(
+            request,
+            'create_board.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+                'categories': categories,
+            }
+        )
+    else:
+        return redirect('login')
+
+def modifyPost(request, pk):
+    user = request.user
+    categories = Category.objects.all()
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            category = Category.objects.get(name =request.POST.get('category'))
+            moderator = request.user
+
+            new_board = Board(title = title, category = category, moderator = moderator)
+            new_board.save()
+            return redirect('/boards')
+
+        else:
+            pass
+            #form = newBoardForm()
+        return render(
+            request,
+            'create_board.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+                'categories': categories,
+            }
+        )
+    else:
+        return redirect('login')
+
+def removePost(request, pk):
+    user = request.user
+    if user.is_authenticated():
+        post = Post.objects.get(pk = pk)
+        post.delete()
+        return redirect('boards')
+    else:
+        return redirect('login')
