@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{post.title}}</h1>
+<h3>by {{post.author}}</h3>
+<hr>
+{{post.body}}
+
+<hr>
+<button onclick="location.href ='/view-board/{{ post.board.id}}';" class="btn btn-primary"><i class="fa fa-arrow-left"></i>   Back</button>
+{% endblock %}

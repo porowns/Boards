@@ -282,3 +282,21 @@ def removePost(request, pk):
         return redirect(board.get_absolute_url())
     else:
         return redirect('login')
+
+def viewPost(request, pk):
+    user = request.user
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+        post = Post.objects.get(pk=pk)
+        return render(
+            request,
+            'view_post.html',
+            context={
+                'user': user,
+                'usergroup': usergroup,
+                'post': post,
+            }
+        )
+    else:
+        return redirect('login')

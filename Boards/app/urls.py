@@ -21,6 +21,7 @@ urlpatterns += {
 
 # Posts
 urlpatterns += {
+    url(r'^view-post/(?P<pk>\d+)/$', views.viewPost, name='view-post'),
     url(r'^create-post', views.createPost, name='create-post'),
     url(r'^modify-post/(?P<pk>\d+)/$', views.modifyPost, name='modify-post'),
     url(r'^remove-post/(?P<pk>\d+)/$', views.removePost, name='remove-post'),
