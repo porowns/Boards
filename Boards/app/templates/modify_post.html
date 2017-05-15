@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<head>
+   <title>Modify Post</title>
+   <link rel="stylesheet" type="text/css" href="{% static "app/css/board.css" %}">
+   <link rel="stylesheet" type="text/css" href="{% static "app/css/post.css" %}">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.2.0/css/bootstrap-theme.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href='//fonts.googleapis.com/css?family=Bungee Outline' rel='stylesheet'>
+</head>
+
+
+
+
+<div class="container">
+  <div class="col-xs-6 col-xs-offset-3 boardbox">
+    <form id="postform" action="." method="post">
+      {% csrf_token %}
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">Title</div>
+          <div class="panel-body">
+            <input type="text" class="form-control" id="usr" name="title" placeholder={{old_post.title}}>
+          </div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+          <div class="panel-heading">Body</div>
+          <div class="panel-body">
+              <textarea name="body" form="postform" placeholder={{old_post.body}}></textarea>
+
+          </div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+            <div class="panel-heading">Board</div>
+            <div class="panel-body">
+                <select required name="board" class="form-control" id="board">
+                  {% for board in boards %}
+                  <option>{{board.title}}</option>}
+                  {% endfor %}
+               </select>
+            </div>
+        </div>
+      </div>
+      <button id="submit" type="submit" class="btn btn-warning btn-lg">Update</button>
+  </form>
+  </div>
+</div>

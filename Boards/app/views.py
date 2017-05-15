@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .utils import getGroup
 from .models import Board, Post, Category
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -223,7 +224,6 @@ def createPost(request):
             context={
                 'user': user,
                 'usergroup': usergroup,
-                'categories': categories,
             }
         )
     else:
@@ -231,29 +231,39 @@ def createPost(request):
 
 def modifyPost(request, pk):
     user = request.user
-    categories = Category.objects.all()
+    boards = Board.objects.all()
+    old_post = Post.objects.get(pk = pk)
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
         if request.method == 'POST':
-            title = request.POST.get('title')
-            category = Category.objects.get(name =request.POST.get('category'))
-            moderator = request.user
+            if request.POST.get('title') == "":
+                title = old_post.title
+            else:
+                title = request.POST.get('title')
 
-            new_board = Board(title = title, category = category, moderator = moderator)
-            new_board.save()
-            return redirect('/boards')
+            if request.POST.get('body') == "":
+                body = old_post.body
+            else:
+                body = request.POST.get('body')
+            author = request.user
+            board = Board.objects.get(title=request.POST.get('board'))
 
+            new_post = Post(title=title, body=body, author=author, board=board)
+            new_post.save()
+            old_post.delete()
+            return redirect('/view-board/%d' % board.id)
         else:
             pass
             #form = newBoardForm()
         return render(
             request,
-            'create_board.html',
+            'modify_post.html',
             context={
                 'user': user,
                 'usergroup': usergroup,
-                'categories': categories,
+                'boards': boards,
+                'old_post': old_post,
             }
         )
     else:
@@ -261,9 +271,10 @@ def modifyPost(request, pk):
 
 def removePost(request, pk):
     user = request.user
+    post = Post.objects.get(pk = pk)
+    board = post.board
     if user.is_authenticated():
-        post = Post.objects.get(pk = pk)
         post.delete()
-        return redirect('boards')
+        return redirect(board.get_absolute_url())
     else:
         return redirect('login')
