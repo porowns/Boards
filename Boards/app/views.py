@@ -146,15 +146,33 @@ def createBoard(request):
 
 def modifyBoard(request, pk):
     user = request.user
+    board = Board.objects.get(pk=pk)
+    categories = Category.objects.all()
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            if title == "":
+                title = board.title
+            category = Category.objects.get(name =request.POST.get('category'))
+            moderator = request.user
+
+            new_board = Board(title = title, category = category, moderator = moderator)
+            new_board.save()
+            board.delete()
+            return redirect('/boards')
+        else:
+            pass
+
         return render(
             request,
             'modify_board.html',
             context={
                 'user': user,
                 'usergroup': usergroup,
+                'board': board,
+                'categories': categories,
             }
         )
     else:

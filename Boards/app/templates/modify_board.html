@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<head>
+   <title>Create</title>
+   <link rel="stylesheet" type="text/css" href="{% static "app/css/board.css" %}">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.2.0/css/bootstrap-theme.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href='//fonts.googleapis.com/css?family=Bungee Outline' rel='stylesheet'>
+</head>
+
+
+
+
+<div class="container">
+  <div class="col-xs-6 col-xs-offset-3 boardbox">
+    <form action="." method="post">
+      {% csrf_token %}
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">Title</div>
+          <div class="panel-body">
+            <input type="text" class="form-control" id="usr" name="title" placeholder={{board.title}}>
+          </div>
+        </div>
+        <hr>
+        <div class="panel panel-default">
+          <div class="panel-heading">Category</div>
+          <div class="panel-body">
+            <select required name="category" class="form-control" id="category">
+              {% for category in categories %}
+              {% if category == board.category %}
+              <option selected>{{category}}</option>
+              {% else %}
+              <option>{{category}}</option>
+              {% endif %}
+              {% endfor %}
+           </select>
+
+          </div>
+        </div>
+      </div>
+
+      <button id="submit" type="submit" class="btn btn-success btn-lg">Submit</button>
+  </form>
+  </div>
+</div>
