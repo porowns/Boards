@@ -163,15 +163,8 @@ def modifyBoard(request, pk):
 def removeBoard(request, pk):
     user = request.user
     if user.is_authenticated():
-        user = request.user
-        usergroup = getGroup(user)
-        return render(
-            request,
-            'remove_board.html',
-            context={
-                'user': user,
-                'usergroup': usergroup,
-            }
-        )
+        board = Board.objects.get(pk = pk)
+        board.delete()
+        return redirect('boards')
     else:
         return redirect('login')
