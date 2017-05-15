@@ -100,6 +100,15 @@ def logoutUser(request):
 
 def viewBoard(request, pk):
     user = request.user
+    board = Board.objects.get(pk=pk)
+    post_list = Post.objects.filter(board = board)
+    user_list = ['1']
+    user_count = len(user_list)
+    for post in Post.objects.filter(board = board):
+        if post.author in user_list:
+            pass
+        else:
+            user_list.append(post.author)
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
@@ -109,6 +118,10 @@ def viewBoard(request, pk):
             context={
                 'user': user,
                 'usergroup': usergroup,
+                'board': board,
+                'posts': post_list,
+                'user_list': user_list,
+                'user_count': user_count,
             }
         )
     else:
