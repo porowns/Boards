@@ -203,27 +203,31 @@ def removeBoard(request, pk):
 
 def createPost(request):
     user = request.user
+    boards = Board.objects.all()
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
         if request.method == 'POST':
+            print "hello"
             title = request.POST.get('title')
-            category = Category.objects.get(name =request.POST.get('category'))
-            moderator = request.user
+            body = request.POST.get('body')
+            author = request.user
+            board = Board.objects.get(title=request.POST.get('board'))
 
-            new_board = Board(title = title, category = category, moderator = moderator)
-            new_board.save()
-            return redirect('/boards')
+            new_post = Post(title=title, body=body, author=author, board=board)
+            new_post.save()
+            return redirect(board.get_absolute_url())
 
         else:
             pass
             #form = newBoardForm()
         return render(
             request,
-            'create_board.html',
+            'create_post.html',
             context={
                 'user': user,
                 'usergroup': usergroup,
+                'boards': boards,
             }
         )
     else:
@@ -252,7 +256,7 @@ def modifyPost(request, pk):
             new_post = Post(title=title, body=body, author=author, board=board)
             new_post.save()
             old_post.delete()
-            return redirect('/view-board/%d' % board.id)
+            return redirect(board.get_absolute_url())
         else:
             pass
             #form = newBoardForm()
