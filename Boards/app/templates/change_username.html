@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form style="text-align: center;" id="login-form" action="/change-username/" method="post" role="form" style="display: block;">
+    {% csrf_token %}
+    <h3>Username</h3>
+    {{form.username}}
+    <h3>Verify Username</h3>
+    {{form.vusername}}
+    <hr>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <hr>
+    {% for field in form %}
+    {{field.errors}}
+    {% endfor %}
+</form>
+{% endblock %}

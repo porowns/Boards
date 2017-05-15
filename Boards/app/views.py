@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .utils import getGroup
 from .models import Board, Post, Category, Profile
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from forms import PasswordForm, UsernameForm
 
 # Create your views here.
 def index(request):
@@ -321,5 +322,62 @@ def favorite(request, pk):
         profile.favorites.add(board)
         profile.save()
         return redirect(board.get_absolute_url())
+    else:
+        return redirect('login')
+
+def changePassword(request):
+    if request.method == 'POST':
+        form = PasswordForm(request.POST)
+
+        if form.is_valid():
+            user = request.user
+            user.set_password(request.POST.get('password'))
+            return HttpResponseRedirect('/profile')
+    else:
+        form = PasswordForm()
+
+    return render(
+        request,
+        'change_password.html',
+        context={
+            'form': form,
+        }
+    )
+
+def changeUsername(request):
+    if request.method == 'POST':
+        form = UsernameForm(request.POST)
+
+        if form.is_valid():
+            user = request.user
+            user.username = request.POST.get('username')
+            user.save()
+            return HttpResponseRedirect('/profile')
+    else:
+        form = UsernameForm()
+
+    return render(
+        request,
+        'change_username.html',
+        context={
+            'form': form,
+        }
+    )
+
+def deleteAccount(request):
+    user = request.user
+    posts = Post.objects.all()
+    boards = Board.objects.all()
+    author = user
+    moderator = user
+    if user.is_authenticated():
+        remove_posts = Post.objects.filter(author = author)
+        remove_boards = Board.objects.filter(moderator = moderator)
+        for post in remove_posts:
+            post.delete()
+        for board in remove_boards:
+            board.delete()
+        user.delete()
+        return redirect('login')
     else:
         return redirect('login')

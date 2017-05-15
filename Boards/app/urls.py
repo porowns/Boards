@@ -27,6 +27,13 @@ urlpatterns += {
     url(r'^remove-post/(?P<pk>\d+)/$', views.removePost, name='remove-post'),
 }
 
+# Profile
+urlpatterns += {
+    url(r'^change-password/$', views.changePassword, name='change-password'),
+    url(r'^change-username/$', views.changeUsername, name='change-username'),
+    url(r'^delete-account/$', views.deleteAccount, name='delete-account'),
+}
+
 # Misc
 urlpatterns += {
     url(r'^favorite/(?P<pk>\d+)/$', views.favorite, name='favorite'),
