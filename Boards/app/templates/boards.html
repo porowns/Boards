@@ -19,6 +19,7 @@
         <th class="tablehead">Actions</th>
       </tr>
       {% for board in boards %}
+        {% if board.category = cat %}
         <tr>
           <td>
             {{ board.title }}
@@ -32,6 +33,8 @@
             <button onclick="location.href ='remove-board/{{ board.id }}';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
           </td>
         </tr>
+        {% else %}
+        {% endif %}
       {% endfor %}
     </table>
    </div>
