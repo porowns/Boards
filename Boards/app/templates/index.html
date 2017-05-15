@@ -43,19 +43,22 @@
         <th class="tablehead">Likes</th>
         <th class="tablehead">Actions</th>
       </tr>
+      {% for post in posts %}
       <tr>
+
         <td>
-          Calculus #12
+          {{post.title}}
         </td>
         <td>
-          15
+          N/A
         </td>
         <td>
-          <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
-          <button onclick="location.href ='#';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
-          <button onclick="location.href ='#';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
+          <button onclick="location.href ='/view-post/{{post.id}}" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
+          <button onclick="location.href ='/modify-post/{{post.id}}';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
+          <button onclick="location.href ='/remove-post/{{post.id}}';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
         </td>
       </tr>
+      {% endfor %}
     </table>
    </div>
 </div>
@@ -72,10 +75,10 @@
       </tr>
       <tr>
         <td>
-          Joe Billy
+          N/A
         </td>
         <td>
-          Calculus ##
+          N/A
         </td>
         <td>
           <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>

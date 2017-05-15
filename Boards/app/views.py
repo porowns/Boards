@@ -9,6 +9,8 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     user = request.user
+    boards = Board.objects.all()
+    posts = Post.objects.filter(author = request.user)
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
@@ -18,6 +20,8 @@ def index(request):
             context={
                 'user': user,
                 'usergroup': usergroup,
+                'boards': boards,
+                'posts': posts,
             }
         )
     else:
