@@ -3,13 +3,14 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .utils import getGroup
-from .models import Board, Post, Category
+from .models import Board, Post, Category, Profile
 from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
     user = request.user
     boards = Board.objects.all()
+    profile = Profile.objects.get(user=user)
     posts = Post.objects.filter(author = request.user)
     if user.is_authenticated():
         user = request.user
@@ -22,6 +23,7 @@ def index(request):
                 'usergroup': usergroup,
                 'boards': boards,
                 'posts': posts,
+                'favorites': profile.favorites.all(),
             }
         )
     else:
@@ -58,6 +60,7 @@ def profile(request):
 def register(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
+
     if not username or not password:
         print "hi"
         return render(
@@ -73,6 +76,8 @@ def register(request):
         user = User(username=username)
         user.set_password(password)
         user.save()
+        profile = Profile(user=user)
+        profile.save()
         user = authenticate(username = username, password=password)
         user_group = Group.objects.get(name="User")
         user_group.user_set.add(user)
@@ -302,5 +307,19 @@ def viewPost(request, pk):
                 'post': post,
             }
         )
+    else:
+        return redirect('login')
+
+def favorite(request, pk):
+    user = request.user
+    board = Board.objects.get(pk=pk)
+    if user.is_authenticated():
+        user = request.user
+        usergroup = getGroup(user)
+
+        profile = Profile.objects.get(user=user)
+        profile.favorites.add(board)
+        profile.save()
+        return redirect(board.get_absolute_url())
     else:
         return redirect('login')

@@ -17,19 +17,21 @@
         <th class="tablehead">Last post</th>
         <th class="tablehead">Actions</th>
       </tr>
+      {% for favorite in favorites %}
       <tr>
         <td>
-          Math Help
+          {{favorite.title}}
         </td>
         <td>
-          Joe Smith
+          N / A
         </td>
         <td>
-          <button onclick="location.href ='#" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
-          <button onclick="location.href ='#';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
-          <button onclick="location.href ='#';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
+          <button onclick="location.href ='/view-board/{{favorite.id}}'" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
+          <button onclick="location.href ='/modify-board/{{favorite.id}}';"type="button" class="btn btn-warning view-button"><i class="fa fa-fw fa-pencil"></i></button>
+          <button onclick="location.href ='/delete-board/{{favorite.id}}';" type="button" class="btn btn-danger view-button"><i class="fa fa-fw fa-times"></i></button>
         </td>
       </tr>
+      {% endfor %}
     </table>
    </div>
 </div>

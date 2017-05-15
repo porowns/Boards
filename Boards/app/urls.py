@@ -26,3 +26,8 @@ urlpatterns += {
     url(r'^modify-post/(?P<pk>\d+)/$', views.modifyPost, name='modify-post'),
     url(r'^remove-post/(?P<pk>\d+)/$', views.removePost, name='remove-post'),
 }
+
+# Misc
+urlpatterns += {
+    url(r'^favorite/(?P<pk>\d+)/$', views.favorite, name='favorite'),
+}

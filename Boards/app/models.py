@@ -57,3 +57,17 @@ class Post(models.Model):
         return self.title
     def get_absolute_url(self):
         return reverse('view-post', args=[str(self.id)])
+
+class Profile(models.Model):
+    """
+    Model representing a user profile.
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    favorites = models.ManyToManyField('Board')
+    friends = models.ManyToManyField(User, related_name='%(class)s_request_friends')
+    enemies = models.ManyToManyField(User, related_name='%(class)s_request_enemies')
+
+    def __str__(self):
+        return self.user.username
+    def get_absolute_url(self):
+        return reverse('profile', args=[str(self.id)])

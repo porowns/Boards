@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Board, Category
+from .models import Post, Board, Category, Profile
 
 # Register your models here.
 @admin.register(Post)
@@ -13,3 +13,7 @@ class Board(admin.ModelAdmin):
 @admin.register(Category)
 class Category(admin.ModelAdmin):
     list_display = ('name', 'id')
+
+@admin.register(Profile)
+class Profile(admin.ModelAdmin):
+    list_display = ('id', 'id')
