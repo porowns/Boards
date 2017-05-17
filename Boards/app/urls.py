@@ -42,5 +42,5 @@ urlpatterns += {
 
 # REST
 urlpatterns += {
-    url(r'^api/posts/$', views.api_post_list, name='api-post-list'),
+    url(r'^api/posts/$', views.api_post_list.as_view(), name='api-post-list'),
 }
