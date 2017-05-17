@@ -116,8 +116,8 @@ def viewBoard(request, pk):
     user = request.user
     board = Board.objects.get(pk=pk)
     post_list = Post.objects.filter(board = board)
-    user_list = ['1']
-    user_count = len(user_list)
+    user_list = []
+
     profile = Profile.objects.get(user=user)
     fav = 0
     if board in profile.favorites.all():
@@ -127,6 +127,7 @@ def viewBoard(request, pk):
             pass
         else:
             user_list.append(post.author)
+    user_count = len(user_list)
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
