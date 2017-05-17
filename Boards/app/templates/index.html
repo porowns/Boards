@@ -14,7 +14,7 @@
      <table class="table"style="width:100%">
       <tr>
         <th class="tablehead">Board Name</th>
-        <th class="tablehead">Last post</th>
+        <th class="tablehead">Moderator</th>
         <th class="tablehead">Actions</th>
       </tr>
       {% for favorite in favorites %}
@@ -23,7 +23,7 @@
           {{favorite.title}}
         </td>
         <td>
-          N / A
+          {{favorite.moderator}}
         </td>
         <td>
           <button onclick="location.href ='/view-board/{{favorite.id}}'" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
