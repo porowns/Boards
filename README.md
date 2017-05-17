@@ -3,7 +3,7 @@ Forum-like board software written in Django. Written in order to practice buildi
 
 # Installation
 
-1. Install Git, Python 2, Pip, Django 1.8
+1. Install Git, Python 2, Pip, Django 1.8, Djnago Rest Framework
 
 2. Clone the repository ```git clone https://github.com/porowns/Boards.git```
 
