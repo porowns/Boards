@@ -43,4 +43,5 @@ urlpatterns += {
 # REST
 urlpatterns += {
     url(r'^api/posts/$', views.api_post_list.as_view(), name='api-post-list'),
+    url(r'^api/posts/(?P<pk>\d+)/$', views.api_post_detail.as_view(), name='api_post_detail'),
 }
