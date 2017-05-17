@@ -6,7 +6,11 @@
   <h3>{{user_count}} Users</h3>
   <hr>
   <button onclick="location.href ='/create-post'" type="button" class="profile-button btn btn-success view-button"><i class="fa fa-fw fa-plus"></i> Create Post</button>
-  <button onclick="location.href ='/favorite/{{board.id}}'" type="button" class="profile-button btn btn-info view-button"><i class="fa fa-fw fa-heart"></i> Favorite</button>
+  {% if fav = 0 %}
+    <button onclick="location.href ='/favorite/{{board.id}}'" type="button" class="profile-button btn btn-info view-button"><i class="fa fa-fw fa-heart"></i> Favorite</button>
+  {% else %}
+    <button type="button" class="profile-button btn view-button"><i class="fa fa-fw fa-heart"></i> Favorited</button>
+  {% endif %}
   <hr>
 </div>
 

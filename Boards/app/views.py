@@ -118,6 +118,10 @@ def viewBoard(request, pk):
     post_list = Post.objects.filter(board = board)
     user_list = ['1']
     user_count = len(user_list)
+    profile = Profile.objects.get(user=user)
+    fav = 0
+    if board in profile.favorites.all():
+        fav = 1
     for post in Post.objects.filter(board = board):
         if post.author in user_list:
             pass
@@ -136,6 +140,7 @@ def viewBoard(request, pk):
                 'posts': post_list,
                 'user_list': user_list,
                 'user_count': user_count,
+                'fav': fav,
             }
         )
     else:
