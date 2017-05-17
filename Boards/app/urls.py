@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^register', views.register, name='register'),
     url(r'^login', views.loginUser, name='login'),
     url(r'^logout', views.logoutUser, name='logout'),
+    url(r'^permission', views.Permission, name='permission')
 ]
 
 # Boards
@@ -37,4 +38,9 @@ urlpatterns += {
 # Misc
 urlpatterns += {
     url(r'^favorite/(?P<pk>\d+)/$', views.favorite, name='favorite'),
+}
+
+# REST
+urlpatterns += {
+    url(r'^api/posts/$', views.api_post_list, name='api-post-list'),
 }

@@ -10,10 +10,10 @@ from forms import PasswordForm, UsernameForm
 # Create your views here.
 def index(request):
     user = request.user
-    boards = Board.objects.all()
-    profile = Profile.objects.get(user=user)
-    posts = Post.objects.filter(author = request.user)
     if user.is_authenticated():
+        boards = Board.objects.all()
+        profile = Profile.objects.get(user=user)
+        posts = Post.objects.filter(author = request.user)
         user = request.user
         usergroup = getGroup(user)
         return render(
@@ -50,11 +50,14 @@ def boards(request):
         return redirect('login')
 
 def profile(request):
+    user = request.user
+    usergroup = getGroup(user)
     return render(
         request,
         'profile.html',
         context={
-
+            'user': user,
+            'usergroup': usergroup,
         }
     )
 
@@ -148,6 +151,8 @@ def createBoard(request):
             title = request.POST.get('title')
             category = Category.objects.get(name =request.POST.get('category'))
             moderator = request.user
+            g = Group.objects.get(name='Moderator')
+            g.user_set.add(user)
 
             new_board = Board(title = title, category = category, moderator = moderator)
             new_board.save()
@@ -172,6 +177,9 @@ def modifyBoard(request, pk):
     user = request.user
     board = Board.objects.get(pk=pk)
     categories = Category.objects.all()
+
+    if board.moderator != user:
+        return redirect('/permission')
     if user.is_authenticated():
         user = request.user
         usergroup = getGroup(user)
@@ -204,9 +212,17 @@ def modifyBoard(request, pk):
 
 def removeBoard(request, pk):
     user = request.user
+    board = Board.objects.get(pk=pk)
+    if board.moderator != user:
+        return redirect('/permission')
     if user.is_authenticated():
         board = Board.objects.get(pk = pk)
         board.delete()
+        g = Group.objects.get(name='Moderator')
+        username = board.moderator
+        if Board.objects.filter(moderator = board.moderator).count() < 1:
+            print Board.objects.filter(moderator = board.moderator).count()
+            g.user_set.remove(User.objects.get(username=username))
         return redirect('boards')
     else:
         return redirect('login')
@@ -381,3 +397,36 @@ def deleteAccount(request):
         return redirect('login')
     else:
         return redirect('login')
+
+def Permission(request):
+    return render(
+        request,
+        'permissions.html',
+    )
+
+# REST API VIEWS
+from django.http import JsonResponse
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from serializers import PostSerializer
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def api_post_list(request):
+    user = request.user
+    responseData = {
+        'success': 'false',
+        'reason': 'Please log in.',
+    }
+
+    if request.method == 'GET':
+        posts = Post.objects.all()
+        serializer = PostSerializer(posts, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = PostSerializer(data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
