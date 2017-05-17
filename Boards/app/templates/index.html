@@ -42,7 +42,7 @@
      <table class="table"style="width:100%">
       <tr>
         <th class="tablehead">Post Title</th>
-        <th class="tablehead">Likes</th>
+        <th class="tablehead">Board</th>
         <th class="tablehead">Actions</th>
       </tr>
       {% for post in posts %}
@@ -52,7 +52,7 @@
           {{post.title}}
         </td>
         <td>
-          N/A
+          {{post.board.title}}
         </td>
         <td>
           <button onclick="location.href ='/view-post/{{post.id}}" type="button" class="btn btn-primary view-button"><i class="fa fa-fw fa-eye"></i></button>
