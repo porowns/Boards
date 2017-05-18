@@ -425,6 +425,7 @@ class api_post_list(APIView):
     GET - LIST ALL POSTS
     POST - CREATE A POST
     """
+    print d
     def get(self, request, format=None):
         posts = Post.objects.all()
         serializer = PostSerializer(posts, many=True)

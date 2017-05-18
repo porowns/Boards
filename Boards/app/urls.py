@@ -41,9 +41,13 @@ urlpatterns += {
 }
 
 # REST
+from . import views as local_view
+from rest_framework.authtoken import views as rest_framework_views
+
 urlpatterns += {
     url(r'^api/posts/$', views.api_post_list.as_view(), name='api-post-list'),
     url(r'^api/posts/(?P<pk>\d+)/$', views.api_post_detail.as_view(), name='api_post_detail'),
     url(r'^api/boards/$', views.api_board_list.as_view(), name='api-board-list'),
     url(r'^api/boards/(?P<pk>\d+)/$', views.api_board_detail.as_view(), name='api_board_detail'),
+    url(r'^api/get_token/$', rest_framework_views.obtain_auth_token, name='get_auth_token'),
 }
